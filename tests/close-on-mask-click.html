@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<script src="/tester.js"></script>
+<script src="/node_modules/jinkela/jinkela.js"></script>
+<script src="/dialog.js"></script>
+<script>
+class Foo extends Jinkela {
+  get template() { return `<h1>hehe</h1>`; }
+}
+
+dialog.popup(new Foo());
+
+setTimeout(() => {
+  Tester.assert(dialog.element.classList.contains('active'));
+  Tester.assert(dialog.box.element.classList.contains('active'));
+  // Close
+  dialog.element.click();
+  setTimeout(() => {
+    Tester.assert(!dialog.element.classList.contains('active'));
+    Tester.assert(!dialog.box.element.classList.contains('active'));
+    Tester.feedback(true);
+  }, 500);
+}, 500);
+</script>

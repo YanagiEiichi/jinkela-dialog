@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<script src="/tester.js"></script>
+<script src="/node_modules/jinkela/jinkela.js"></script>
+<script src="/dialog.js"></script>
+<script>
+const TITLE = 'Dialog';
+const TEXT = 'hehe';
+class Foo extends Jinkela {
+  get template() { return `<h1>${TEXT}</h1>`; }
+}
+
+dialog.popup(new Foo());
+
+setTimeout(() => {
+  let h3 = document.querySelector('h3');
+  let h1 = document.querySelector('h1');
+  Tester.assert(h3);
+  Tester.assert(h1);
+  Tester.assert(h3.textContent === TITLE);
+  Tester.assert(h1.textContent === TEXT);
+  Tester.assert(dialog.element.classList.contains('active'));
+  Tester.assert(dialog.box.element.classList.contains('active'));
+  Tester.feedback(true);
+}, 500);
+</script>
