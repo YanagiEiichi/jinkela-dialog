@@ -79,10 +79,10 @@
       const duration = 300;
       if (this.element.classList.contains('active')) {
         let player = this.element.animate([
-          { offset: 0, transform: `${this.activeTransform} rotateY(0deg)` },
-          { offset: 1 / 2, transform: `${this.activeTransform} rotateY(90deg)` },
-          { offset: 1 / 2, transform: `${this.activeTransform} rotateY(-90deg)` },
-          { offset: 1, transform: `${this.activeTransform} rotateY(0deg)` }
+          { offset: 0, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(0deg)` },
+          { offset: 1 / 2, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(90deg)` },
+          { offset: 1 / 2, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(-90deg)` },
+          { offset: 1, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(0deg)` }
         ], { duration });
         setTimeout(render, duration / 2);
       } else {
@@ -93,7 +93,7 @@
     unset() { this.element.classList.remove('active'); }
     click(event) { event.dontCancel = true; }
     get tagName() { return 'dl'; }
-    get activeTransform() { return `translateX(-50%) translateY(-60%) translateZ(1280px) scale(.5)`; }
+    get activeTransform() { return `translateX(-50%) translateY(-50%)`; }
     get styleSheet() {
       return `
         :scope {
@@ -105,7 +105,7 @@
           top: 50%;
           left: 50%;
           transition: transform 200ms ease;
-          transform: translateX(-50%) translateY(-80%) translateZ(1280px) scale(.4);
+          transform: translateX(-50%) translateY(-65%) scale(.8);
           background: #fff;
           display: inline-block;
           z-index: 1;
