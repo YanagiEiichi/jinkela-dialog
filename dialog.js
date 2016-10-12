@@ -48,12 +48,13 @@
           overflow: hidden;
           line-height: 48px;
           padding: 0px 1em;
-          border-bottom: 1px solid #ebe6e1;
+          border-bottom: 1px solid #e4e4e4;
           display: block;
           font-size: 16px;
           position: relative;
         }
         :scope > h3 {
+          font-wight: 500;
           float: left;
           margin: 0;
           font-size: inherit;
