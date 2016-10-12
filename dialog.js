@@ -54,7 +54,7 @@
           position: relative;
         }
         :scope > h3 {
-          font-wight: 500;
+          font-weight: 500;
           float: left;
           margin: 0;
           font-size: inherit;
