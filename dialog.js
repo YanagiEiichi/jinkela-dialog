@@ -90,7 +90,7 @@
       }
     }
     unset() {
-      if (this.content) this.content.destroy();
+      // if (this.content) this.content.destroy();
       this.component = null;
       this.element.classList.remove('active');
     }

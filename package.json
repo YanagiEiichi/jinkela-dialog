@@ -1,6 +1,6 @@
 {
   "name": "jinkela-dialog",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A DIALOG LIB IN JINKELA",
   "main": "dialog.js",
   "scripts": {
