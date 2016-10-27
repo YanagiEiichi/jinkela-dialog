@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<script src="/tester.js"></script>
+<script src="/node_modules/jinkela/jinkela.js"></script>
+<script src="/dialog.js"></script>
+<script>
+const TITLE = 'My Title';
+const TEXT = 'hehe';
+class Foo extends Jinkela {
+  get title() { return TITLE; }
+  get template() { return `<h1>${TEXT}</h1>`; }
+}
+
+dialog.popup(new Foo());
+dialog.once('dialogcancel', event => {
+  event.stopPropagation();
+  setTimeout(() => {
+    Tester.assert(dialog.element.classList.contains('active'));
+    Tester.assert(dialog.box.element.classList.contains('active'));
+    dialog.element.querySelector('svg').dispatchEvent(new Event('click', { bubbles: true }));
+    setTimeout(() => {
+      Tester.assert(!dialog.element.classList.contains('active'));
+      Tester.assert(!dialog.box.element.classList.contains('active'));
+      Tester.feedback(true);
+      dialog.element.querySelector('svg').dispatchEvent(new Event('click', { bubbles: true }));
+    }, 500);
+  }, 500);
+});
+
+setTimeout(() => {
+  dialog.element.querySelector('svg').dispatchEvent(new Event('click', { bubbles: true }));
+}, 500);
+</script>

@@ -8,11 +8,7 @@
 
   class DialogHeaderCloseButton extends Jinkela {
     init() { this.element.addEventListener('click', event => this.click(event)); }
-    click() {
-      let event = document.createEvent('event');
-      event.initEvent('dialogcancel', true);
-      this.element.dispatchEvent(event);
-    }
+    click() { this.element.dispatchEvent(new CustomEvent('dialogcancel', { bubbles: true, cancelable: true })); }
     get template() {
       return `
         <svg width="16" height="16" stroke="#4c4c4c">
@@ -68,8 +64,10 @@
     init() {
       this.element.addEventListener('click', event => this.click(event));
       this.header = new DialogHeader().to(this);
+      this.component = null;
     }
     set(component) {
+      this.component = component;
       component = component || new Jinkela();
       const render = () => {
         this.header.title = component.title || 'Dialog';
@@ -91,7 +89,11 @@
         this.element.classList.add('active');
       }
     }
-    unset() { this.element.classList.remove('active'); }
+    unset() {
+      if (this.content) this.content.destroy();
+      this.component = null;
+      this.element.classList.remove('active');
+    }
     click(event) { event.dontCancel = true; }
     get tagName() { return 'dl'; }
     get activeTransform() { return `translateX(-50%) translateY(-50%)`; }
@@ -119,6 +121,15 @@
   }
 
   class Dialog extends Jinkela {
+    on(name, listener) { this.box.element.addEventListener(name, listener); }
+    off(name, listener) { this.box.element.removeEventListener(name, listener); }
+    once(name, listener) {
+      let that = this;
+      this.on(name, function callee(...args) {
+        that.off(name, callee);
+        return listener.call(this, ...args);
+      });
+    }
     init() {
       this.element.addEventListener('click', event => this.click(event));
       this.element.addEventListener('dialogcancel', event => this.cancel(event));
@@ -142,7 +153,7 @@
     }
     click(event) {
       if (event.dontCancel || this.dontCancel) return;
-      this.cancel();
+      this.box.element.dispatchEvent(new CustomEvent('dialogcancel', { bubbles: true, cancelable: true }));
     }
     get styleSheet() {
       return `
