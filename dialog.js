@@ -138,6 +138,7 @@
     get popup() {
       let value = content => {
         this.box.set(content);
+        void getComputedStyle(this.box.element).display; // update internal style cache
         this.element.classList.add('active');
       };
       Object.defineProperty(this, 'popup', { configurable: true, value });
@@ -179,14 +180,17 @@
         }
       `;
     }
-    static create() {
-      let dialog = new this();
-      let render = () => dialog.to(document.body);
-      document.body ? render() : addEventListener('DOMContentLoaded', render);
-      return dialog;
-    }
   }
 
-  var dialog = Dialog.create();
+  Object.defineProperty(window, 'dialog', {
+    configurable: true,
+    get() {
+      let value = new Dialog();
+      let render = () => value.to(document.body);
+      document.body ? render() : addEventListener('DOMContentLoaded', render);
+      Object.defineProperty(this, 'dialog', { value, configurable: true });
+      return value;
+    }
+  });
 
 }
