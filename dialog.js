@@ -102,6 +102,7 @@
         :scope {
           box-sizing: border-box;
           min-width: 514px;
+          max-height: 80%;
           padding: 0;
           margin: auto;
           position: absolute;
@@ -112,6 +113,7 @@
           background: #fff;
           display: inline-block;
           z-index: 1;
+          overflow: auto;
         }
         :scope.active {
           transform: ${this.activeTransform};
