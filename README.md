@@ -1,21 +1,39 @@
-## jinkela-dialog
+# Jinkela-Dialog
 
-A DIALOG LIB IN JINKELA
-
-#### Install
+## Install
 
 ```bash
 npm install jinkela-dialog
 ```
 
-#### Usage
+## Usage
 
-```js
+### dialog.popup([component])
+
+Popup a dialog.
+
+* `component` **Jinkela** Show the component with dialog.
+
+### dialog.cancel()
+
+Close current dialog.
+
+## Demo
+
+```html
+<script src="https://unpkg.com/jinkela@1.2.19/umd.js"></script>
+<script src="https://unpkg.com/jinkela-dialog@0.1.6/dialog.js"></script>
+<script>
 class Foo extends Jinkela {
-  /* blah blah */
+  get template() {
+    return `
+      <h1>
+        Foo
+      </h1>
+    `;
+  }
 }
 
-dialog.popup(new Foo()); // Popup Dialog
-
-dialog.cancel(); // Cancel Dialog
+dialog.popup(new Foo());
+</script>
 ```
