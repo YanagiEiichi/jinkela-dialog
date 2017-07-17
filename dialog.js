@@ -3,7 +3,7 @@
   class DialogContent extends Jinkela {
     get tagName() { return 'dd'; }
     destroy() { this.element.remove(); }
-    get styleSheet() { return `:scope { margin: 0; }`; }
+    get styleSheet() { return ':scope { margin: 0; }'; }
   }
 
   class DialogHeaderCloseButton extends Jinkela {
@@ -37,7 +37,7 @@
 
   class DialogHeader extends Jinkela {
     init() { new DialogHeaderCloseButton().to(this); }
-    get template() { return `<dt><h3>{title}</h3></dt>`; }
+    get template() { return '<dt><h3>{title}</h3></dt>'; }
     get styleSheet() {
       return `
         :scope {
@@ -56,7 +56,7 @@
           font-size: inherit;
           line-height: inherit;
         }
-      `; 
+      `;
     }
   }
 
@@ -77,7 +77,7 @@
       };
       const duration = 300;
       if (this.element.classList.contains('active')) {
-        let player = this.element.animate([
+        this.element.animate([
           { offset: 0, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(0deg)` },
           { offset: 1 / 2, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(90deg)` },
           { offset: 1 / 2, transform: `${this.activeTransform} translateZ(1280px) scale(.5) rotateY(-90deg)` },
@@ -96,7 +96,7 @@
     }
     click(event) { event.dontCancel = true; }
     get tagName() { return 'dl'; }
-    get activeTransform() { return `translateX(-50%) translateY(-50%)`; }
+    get activeTransform() { return 'translateX(-50%) translateY(-50%)'; }
     get styleSheet() {
       return `
         :scope {

@@ -4,6 +4,7 @@
   "description": "A DIALOG LIB IN JINKELA",
   "main": "dialog.js",
   "scripts": {
+    "lint": "eslint --fix .",
     "test": "ui-tester-start tests"
   },
   "author": "YanagiEiichi <admin@web-tinker.com>",
