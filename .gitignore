@@ -1,2 +1,4 @@
 .*
+*.log
+umd.js
 node_modules
